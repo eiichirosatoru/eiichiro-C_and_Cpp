@@ -1,6 +1,5 @@
-#include <iostream>
-#include <cmath> // Include <cmath> for C++ standard functions
-using namespace std;
+#include <stdio.h>
+#include <math.h>
 
 typedef struct DIEM
 {
@@ -15,31 +14,26 @@ typedef struct DUONG_THANG
     float c;
 } DUONG_THANG;
 
-DIEM M;
-DUONG_THANG D;
-DUONG_THANG D1;
-DIEM H;
-
 void NhapDiem(DIEM &M)
 {
-    printf(" Nhap toa do cua x: ");
-    scanf("%f", M.x)
-    printf(" Nhap toa do cua y: ");
-    scanf("%f",M.y);
+    printf("Nhap toa do cua x: ");
+    scanf("%f", &M.x);
+    printf("Nhap toa do cua y: ");
+    scanf("%f", &M.y);
 }
 
 void Nhap_Duong_Thang(DUONG_THANG &D)
 {
     do
     {
-      printf("He so a: ");
-      scanf("%f", &a);
+        printf("He so a: ");
+        scanf("%f", &D.a);
 
-      printf("He so b: "); 
-      scanf("%f", &b);
+        printf("He so b: ");
+        scanf("%f", &D.b);
 
-      printf("He so c: ");
-      scanf("%f", &c);
+        printf("He so c: ");
+        scanf("%f", &D.c);
     } while (D.a * D.a + D.b * D.b <= 0);
 }
 
@@ -70,8 +64,7 @@ DIEM XAC_DINH_GIAO_DIEM(DUONG_THANG D1, DUONG_THANG D)
 
 void Xuat_Diem(DIEM M)
 {
-    printf("Toa do hinh chieu cua diem M tren duong thang D la: \n");
-    printf("(%f, %f)", M.x, M.y);
+    printf("Toa do hinh chieu cua diem M tren duong thang D la:(%5.2f;%5.2f) \n", M.x, M.y);
 }
 
 int main()
@@ -80,9 +73,12 @@ int main()
     DUONG_THANG D;
     DIEM H;
     DUONG_THANG D1;
+
     NhapDiem(M);
     Nhap_Duong_Thang(D);
     D1 = TAO_DUONG_VUONG_GOC(M, D);
     H = XAC_DINH_GIAO_DIEM(D1, D);
-    Xuat_Diem(M);
+    Xuat_Diem(H);
+
+    return 0;
 }
