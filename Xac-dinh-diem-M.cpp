@@ -22,22 +22,24 @@ DIEM H;
 
 void NhapDiem(DIEM &M)
 {
-    cout << "Nhap toa do cua x: ";
-    cin >> M.x;
-    cout << "Nhap toa do cua y: ";
-    cin >> M.y;
+    printf(" Nhap toa do cua x: ");
+    scanf("%f", M.x)
+    printf(" Nhap toa do cua y: ");
+    scanf("%f",M.y);
 }
 
 void Nhap_Duong_Thang(DUONG_THANG &D)
 {
     do
     {
-        cout << "He so a: ";
-        cin >> D.a;
-        cout << "He so b: ";
-        cin >> D.b;
-        cout << "He so c: ";
-        cin >> D.c;
+      printf("He so a: ");
+      scanf("%f", &a);
+
+      printf("He so b: "); 
+      scanf("%f", &b);
+
+      printf("He so c: ");
+      scanf("%f", &c);
     } while (D.a * D.a + D.b * D.b <= 0);
 }
 
@@ -68,7 +70,8 @@ DIEM XAC_DINH_GIAO_DIEM(DUONG_THANG D1, DUONG_THANG D)
 
 void Xuat_Diem(DIEM M)
 {
-    cout << "Toa do hinh chieu cua diem M tren duong thang D la H:\n" << "(" << M.x << "," << M.y << ")";
+    printf("Toa do hinh chieu cua diem M tren duong thang D la: \n");
+    printf("(%f, %f)", M.x, M.y);
 }
 
 int main()
