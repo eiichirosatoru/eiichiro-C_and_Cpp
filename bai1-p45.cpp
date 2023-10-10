@@ -12,6 +12,7 @@ struct ThiSinh {
     int DoiTuong;
     float Diem;
     float Toan, Ly, Hoa;
+    float TongDiem;
     int KetQua; // 1: đậu, 0: rớt
 };
 
@@ -25,86 +26,87 @@ void Nhap1TS(ThiSinh &ts)
     getline(cin, ts.HoTen);
     cout << "Nhap Ma nganh (1: Toan, 2: Ly, 3: Hoa): ";
     cin >> ts.MaNganh;
-    cout << "Nhap Khu vuc (1: Khu vuc 1,2: Khu vuc 2,3: Khu vuc 3:";
+    cout << "Nhap Khu vuc (1: Khu vuc 1, 2: Khu vuc 2, 3: Khu vuc 3): ";
     cin >> ts.KhuVuc;
-    cout << "Nhap Doi tuong (1: Nhom 1,2: Nhom 2,3: Nhom 3): ";
+    cout << "Nhap Doi tuong (1: Nhom 1, 2: Nhom 2, 3: Nhom 3): ";
     cin >> ts.DoiTuong;
-    cout << "Nhap Diem (0 <= Toan, Ly, Hoa <= 10) : ";
-    cin >> ts.Diem;
+    cout << "Nhap Diem Toan: ";
+    cin >> ts.Toan;
+    cout << "Nhap Diem Ly: ";
+    cin >> ts.Ly;
+    cout << "Nhap Diem Hoa: ";
+    cin >> ts.Hoa;
 }
-void NhapDSTS (ThiSinh ts[], int &n)
+
+void NhapDSTS(ThiSinh ts[], int &n)
 {
-    cout << "Nhap so luong thi sinh: \n";
+    cout << "Nhap so luong thi sinh: ";
     cin >> n;
     for(int i = 0; i < n; i++)
-        {
-            cout << "Nhap thong tin cua thi sinh thu: " << i + 1;
-            Nhap1TS(ts[i]);
-        }
+    {
+        cout << "Nhap thong tin cua thi sinh thu " << i + 1 << ":\n";
+        Nhap1TS(ts[i]);
+    }
 }
+
 void Xuat1TS(ThiSinh ts)
 {
-    cout <<" So bao danh: " << ts.SoBaoDanh;
-    cout <<" Ho ten thi sinh: " << ts.HoTen;
-    cout <<" Ma nganh: " << ts.MaNganh;
-    cout <<" Khu vuc: " << ts.KhuVuc;
-    cout <<" Doi tuong: " << ts.DoiTuong;
-    cout <<" Diem: " << ts.Diem;
+    cout <<" So bao danh: " << ts.SoBaoDanh << endl;
+    cout <<" Ho ten thi sinh: " << ts.HoTen << endl;
+    cout <<" Ma nganh: " << ts.MaNganh << endl;
+    cout <<" Khu vuc: " << ts.KhuVuc << endl;
+    cout <<" Doi tuong: " << ts.DoiTuong << endl;
+    cout <<" Diem Toan: " << ts.Toan << endl;
+    cout <<" Diem Ly: " << ts.Ly << endl;
+    cout <<" Diem Hoa: " << ts.Hoa << endl;
+    cout <<" Tong diem: " << ts.TongDiem << endl;
+    cout <<" Ket qua: " << (ts.KetQua == 1 ? "Trung tuyen" : "Rot") << endl;
+    cout << "--------------------------------" << endl;
 }
-void XuatDSTS(ThiSinh ts)
+
+void XuatDSTS(ThiSinh ts[], int n)
 {
     for(int i = 0; i < n; i++)
-        {
-            cout <<" Thong tin thi sinh thu: ", i + 1;
-            Xuat1TS(ts[i]);
-        }
-}
-// Hàm tính tổng điểm
-void TongDiem(ThiSinh ts)
-{
-    if(ts.Manganh == 1)
     {
-        ts.TongDiem = ts.
+        cout <<" Thong tin thi sinh thu " << i + 1 << ":\n";
+        Xuat1TS(ts[i]);
     }
 }
-void XacDinhKetQua(ThiSinh &ts) {
-    float diemChuan = 0.0;
 
-    if (ts.DoiTuong == 1) {
-        if (ts.KhuVuc == 1) {
-            diemChuan = 22.0;
-        } else if (ts.KhuVuc == 2) {
-            diemChuan = 23.0;
-        } else if (ts.KhuVuc == 3) {
-            diemChuan = 24.0;
-        }
-    } else if (ts.DoiTuong == 2) {
-        if (ts.KhuVuc == 1) {
-            diemChuan = 22.5;
-        } else if (ts.KhuVuc == 2) {
-            diemChuan = 23.5;
-        } else if (ts.KhuVuc == 3) {
-            diemChuan = 24.5;
-        }
-    } else if (ts.DoiTuong == 3) {
-        if (ts.KhuVuc == 1) {
-            diemChuan = 23.0;
-        } else if (ts.KhuVuc == 2) {
-            diemChuan = 24.0;
-        } else if (ts.KhuVuc == 3) {
-            diemChuan = 25.0;
-        }
+// Hàm tính tổng điểm
+void TongDiem(ThiSinh &ts)
+{
+    if(ts.MaNganh == 1)
+    {
+        ts.TongDiem = ts.Toan * 2 + ts.Ly + ts.Hoa;
     }
-
-    if (ts.TongDiem >= diemChuan) {
-        ts.KetQua = 1; // Đậu
-    } else {
-        ts.KetQua = 0; // Rớt
+    else if(ts.MaNganh == 2)
+    {
+        ts.TongDiem = ts.Toan + ts.Ly * 2 + ts.Hoa;
+    }
+    else if(ts.MaNganh == 3)
+    {
+        ts.TongDiem = ts.Toan + ts.Ly + ts.Hoa * 2;
     }
 }
-void XuatThiSinhTrungTuyen(const ThiSinh &ts) {
+
+// Hàm xác định kết quả đậu/rớt
+void XacDinhKetQua(ThiSinh &ts) 
+{
+    float diemchuan[3][3] = {{22,23,24},{22.5,23.5,24.5},{23,24,25}};
+    TongDiem(ts);
+    
+    if(ts.TongDiem > diemchuan[ts.DoiTuong-1][ts.KhuVuc-1])
+        ts.KetQua = 1;
+    else
+        ts.KetQua = 0;
+}
+
+void XuatThiSinhTrungTuyen(const ThiSinh &ts) 
+{
     // Kiểm tra nếu thí sinh đã trúng tuyển (KetQua == 1)
-    if (ts.KetQua == 1) {
+    if (ts.KetQua == 1) 
+    {
         cout << "So bao danh: " << ts.SoBaoDanh << endl;
         cout << "Ho ten: " << ts.HoTen << endl;
         cout << "Ma nganh: " << ts.MaNganh << endl;
@@ -115,41 +117,18 @@ void XuatThiSinhTrungTuyen(const ThiSinh &ts) {
         cout << "--------------------------------" << endl;
     }
 }
-int main() {
+
+int main() 
+{
+    ThiSinh ts[50];
     int n;
-    cout << "Nhap so luong thi sinh (0<=n<=50): ";
-    cin >> n;
+    NhapDSTS(ts, n);
+    XuatDSTS(ts, n);
 
-    if (n < 0 || n > 50) {
-        cout << "So luong thi sinh khong hop le." << endl;
-        return 1;
-    }
-
-    ThiSinh danhSachThiSinh[50];
-
-    for (int i = 0; i < n; i++) {
-        cout << "Nhap thong tin cho thi sinh " << i + 1 << ":" << endl;
-        NhapThiSinh(danhSachThiSinh[i]);
-        danhSachThiSinh[i].TongDiem = TinhTongDiem(danhSachThiSinh[i]);
-        XacDinhKetQua(danhSachThiSinh[i]); // Xác định kết quả dựa trên điểm chuẩn
-    }
-
-    cout << "Danh sach thi sinh va ket qua:" << endl;
-    for (int i = 0; i < n; i++) {
-        cout << "Thi sinh " << i + 1 << ":" << endl;
-        cout << "So bao danh: " << danhSachThiSinh[i].SoBaoDanh << endl;
-        cout << "Ho ten: " << danhSachThiSinh[i].HoTen << endl;
-        cout << "Tong diem: " << danhSachThiSinh[i].TongDiem << endl;
-        if (danhSachThiSinh[i].KetQua == 1) {
-            cout << "Ket qua: Dau" << endl;
-        } else {
-            cout << "Ket qua: Rot" << endl;
-        }
-        cout << "--------------------------------" << endl;
-    }
     cout << "Danh sach thi sinh trung tuyen:" << endl;
     for (int i = 0; i < n; i++) {
-        XuatThiSinhTrungTuyen(danhSachThiSinh[i]);
+        XacDinhKetQua(ts[i]);
+        XuatThiSinhTrungTuyen(ts[i]);
     }
 
     return 0;
