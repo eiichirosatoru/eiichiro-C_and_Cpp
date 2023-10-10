@@ -11,12 +11,13 @@ struct ThiSinh {
     int KhuVuc;
     int DoiTuong;
     float Diem;
-    float TongDiem;
+    float Toan, Ly, Hoa;
     int KetQua; // 1: đậu, 0: rớt
 };
 
 // Hàm nhập thông tin cho một thí sinh
-void NhapThiSinh(ThiSinh &ts) {
+void Nhap1TS(ThiSinh &ts) 
+{
     cout << "Nhap So bao danh: ";
     cin >> ts.SoBaoDanh;
     cout << "Nhap Ho ten: ";
@@ -31,18 +32,40 @@ void NhapThiSinh(ThiSinh &ts) {
     cout << "Nhap Diem (0 <= Toan, Ly, Hoa <= 10) : ";
     cin >> ts.Diem;
 }
-
+void NhapDSTS (ThiSinh ts[], int &n)
+{
+    cout << "Nhap so luong thi sinh: \n";
+    cin >> n;
+    for(int i = 0; i < n; i++)
+        {
+            cout << "Nhap thong tin cua thi sinh thu: " << i + 1;
+            Nhap1TS(ts[i]);
+        }
+}
+void Xuat1TS(ThiSinh ts)
+{
+    cout <<" So bao danh: " << ts.SoBaoDanh;
+    cout <<" Ho ten thi sinh: " << ts.HoTen;
+    cout <<" Ma nganh: " << ts.MaNganh;
+    cout <<" Khu vuc: " << ts.KhuVuc;
+    cout <<" Doi tuong: " << ts.DoiTuong;
+    cout <<" Diem: " << ts.Diem;
+}
+void XuatDSTS(ThiSinh ts)
+{
+    for(int i = 0; i < n; i++)
+        {
+            cout <<" Thong tin thi sinh thu: ", i + 1;
+            Xuat1TS(ts[i]);
+        }
+}
 // Hàm tính tổng điểm
-float TinhTongDiem(const ThiSinh &ts) {
-    float heSo = 1.0;
-    if (ts.MaNganh == 1) {
-        heSo = 2.0; // Hệ số cho ngành Toán
-    } else if (ts.MaNganh == 2) {
-        heSo = 2.0; // Hệ số cho ngành Lý
-    } else if (ts.MaNganh == 3) {
-        heSo = 2.0; // Hệ số cho ngành Hóa
+void TongDiem(ThiSinh ts)
+{
+    if(ts.Manganh == 1)
+    {
+        ts.TongDiem = ts.
     }
-    return ts.Diem * heSo;
 }
 void XacDinhKetQua(ThiSinh &ts) {
     float diemChuan = 0.0;
